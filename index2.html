@@ -1,0 +1,95 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v4.0.0/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
+    <!-- <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script> -->
+    <script src="https://rawgit.com/takahirox/aframe-rain/master/build/aframe-rain.min.js"></script>
+    <script src="https://rawgit.com/protyze/aframe-curve-component/master/dist/aframe-curve-component.min.js"></script>
+    <script src="https://rawgit.com/protyze/aframe-alongpath-component/master/dist/aframe-alongpath-component.min.js"></script>
+    <script src="https://rawgit.com/chenzlabs/stats-in-vr/master/dist/aframe-stats-in-vr-component.min.js"></script>
+    <script src="js/aframe-text-geometry-component.min.js"></script>
+
+    <script>
+    
+        var prevData = "scale: 0.03 0.03 0.03";
+        var listenerAdded = false;
+        var scene = document.querySelector('a-scene');  
+        var playOnce = false; 
+        var isBig = false;
+        var listenerAdded = false;
+     
+       
+        
+            
+    AFRAME.registerComponent('scale-fox-control', {
+      schema: {default: ''},
+      init() {
+         
+        const fox = document.querySelector('#fox');
+        var scene = document.querySelector('a-scene');
+        console.log('It was clicked');
+   
+      this.el.addEventListener('click', () => {
+            
+          if(isBig){
+            fox.setAttribute("scale","0.03 0.03 0.03"); 
+            isBig = false;
+          }
+          else{
+            fox.setAttribute("scale","0.3 0.3 0.3"); 
+            isBig = false;
+          }   
+        }); 
+   
+      }
+    });
+    </script>  
+
+
+
+  </head>
+  <body>
+    <!-- <a-scene rain stats-in-vr="position:0 -0.9 -0.5; scale:1 1 1"> -->
+    <a-scene rain> 
+      <a-curve id="track1" curve="closed: true; type: CubicBezier" rotation="0 90 0">
+        <a-curve-point position="0 0 -8" rotation="0 90 0"></a-curve-point>
+        <a-curve-point position="0 0 -8" rotation="0 90 0"></a-curve-point>
+        <a-curve-point position="8 0 0" rotation="0 90 0" ></a-curve-point>
+        <a-curve-point position="0 0 8" rotation="0 90 0"></a-curve-point>
+        <a-curve-point position="-8 0 0" rotation="0 90 0"></a-curve-point>
+      </a-curve>
+          
+      <a-entity position="0 2.25 -15" particle-system="preset: rain"></a-entity>
+      <a-entity position="0 2.25 -15" particle-system="color: #EF0000,#44CC00"></a-entity>
+      <a-box position="-3 0.5 -3" rotation="0 45 20" color="#AAC3AA"></a-box>
+      <a-sphere position="0 1.25 -50" radius="1.25" color="#EF2D5E"></a-sphere>
+      <a-cylinder position="3 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+      <!-- <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane> -->
+      <a-sky color="#ECECEC"></a-sky>
+      <a-gltf-model id ="fox" class="clickable" scale-fox-control=""
+                    alongpath=" dur: 20000;  loop: true; curve: #track1" position="0 0 -4" rotation="0 90 0" scale =".03 .03 .03"
+                    animation-mixer src="./scene.gltf">
+      </a-gltf-model>
+      
+      <a-entity id= "run" class="clickable" scale-fox-control position="-2 0 0" rotation="0 0 0" scale="0.5 .6 .3" 
+          text-geometry="value: RUN; font: #exoFont; bevelEnabled: true; bevelSize: 0.1; bevelThickness: 0.1; curveSegments: 1; size: 1; height: 0.5;" material="color:pink; metalness:0.9; roughness: 0.05; sphericalEnvMap: #chrome;">
+      </a-entity> 
+      
+     <a-entity environment="preset: forest; dressingAmount: 500"></a-entity> 
+
+     <a-camera>
+        <a-entity 
+        raycaster="objects: .clickable"
+        cursor="fuse: true; fuseTimeout: 500"
+        position="0 0 -1"
+        geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+        material="color: green; shader: flat">
+        </a-entity>
+      </a-camera>
+
+          
+      
+    </a-scene>
+  </body>
+</html>
