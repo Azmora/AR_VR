@@ -13,7 +13,7 @@
   <body>
     <!-- <a-scene rain stats-in-vr="position:0 -0.9 -0.5; scale:1 1 1"> -->
     <a-scene> 
-      <a-curve id="track1" curve="closed: true; type: CubicBezier" rotation="0 90 0">
+      <a-curve id="track1" curve="closed: true; type: CubicBezier" rotation="0 90 0" scale="2 2 2">
         <a-curve-point position="0 0 -8" rotation="0 90 0"></a-curve-point>
         <a-curve-point position="0 0 -8" rotation="0 90 0"></a-curve-point>
         <a-curve-point position="8 0 0" rotation="0 90 0" ></a-curve-point>
@@ -28,7 +28,7 @@
       <a-cylinder position="3 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
       <!-- a-plane position="0 0 -4" rotation="-90 0 0" width="40" height="40" color="#7BC8A4"></a-plane> -->
       <a-sky color="#ECECEC"></a-sky>
-      <a-gltf-model alongpath=" dur: 20000;  loop: true; curve: #track1" position="0 0 -4" rotation="0 90 0" scale =".03 .03 .03"   animation-mixer src="./scene.gltf"></a-gltf-model>
+      <a-gltf-model alongpath=" dur: 20000;  loop: true; curve: #track1" position="0 0 -12" rotation="0 90 0" scale =".3 .3 .3"   animation-mixer src="./scene.gltf"></a-gltf-model>
       
       
       <a-entity environment="preset: forest; dressingAmount: 200"></a-entity> 
